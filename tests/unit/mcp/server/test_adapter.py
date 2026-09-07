@@ -4895,7 +4895,7 @@ async def test_server_shutdown_drains_runtime_control_bus() -> None:
 
     async def blocked(_event: BaseEvent) -> None:
         started.set()
-        await asyncio.sleep(60)
+        await asyncio.Event().wait()
 
     bus.subscribe(lambda _event: True, blocked)
     tasks = bus.publish(
